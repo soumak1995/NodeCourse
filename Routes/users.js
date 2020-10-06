@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 var User = require('../models/user');
 
 
-var router = express.Router();
-router.use(bodyParser.json());
+var usersRouter = express.Router();
+usersRouter.use(bodyParser.json());
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
 // });
-router.post('/signup', (req, res, next) => {
+usersRouter.post('/signup', (req, res, next) => {
   User.findOne({username: req.body.username})
   .then((user) => {
     if(user != null) {
@@ -31,7 +31,7 @@ router.post('/signup', (req, res, next) => {
   .catch((err) => next(err));
 });
 
-router.post('/login', (req, res, next) => {
+usersRouter.post('/login', (req, res, next) => {
 
   if(!req.session.user) {
     var authHeader = req.headers.authorization;
@@ -75,7 +75,7 @@ router.post('/login', (req, res, next) => {
   }
 })
 
-router.get('/logout', (req, res) => {
+usersRouter.get('/logout', (req, res) => {
   if (req.session) {
     req.session.destroy();
     res.clearCookie('session-id');
@@ -87,4 +87,4 @@ router.get('/logout', (req, res) => {
     next(err);
   }
 });
-module.exports = router;
+module.exports = usersRouter;
