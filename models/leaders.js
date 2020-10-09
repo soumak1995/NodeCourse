@@ -1,6 +1,7 @@
 
 const mongoose=require('mongoose');
 require('mongoose-currency').loadType(mongoose);
+var authenticate = require('../authenticate');
 const Currency = mongoose.Types.Currency;
 const Schema = mongoose.Schema;
 const leaderSchema=new Schema({
