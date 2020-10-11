@@ -60,5 +60,19 @@ usersRouter.get('/logout', (req, res,next) => {
     next(err);
   }
 });
+usersRouter.get('/users', authenticate.verifyUser,authenticate.verifyAdmin,(req, res,next) => {
+  User.find((err,data)=>{
+    if (err) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({err: err});
+      return ;
+    }
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(data);
+    
+  })
+})
 
 module.exports = usersRouter;

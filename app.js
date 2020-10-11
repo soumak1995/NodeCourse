@@ -5,6 +5,7 @@ const bodyParser=require('body-parser')
 const dishRouter = require('./Routes/dishRouter');
 const promotionsRouter=require('./Routes/PromoRouter')
 const leadersRouter=require('./Routes/leaderRouter')
+const uploadRouter = require('./Routes/uploadRouter')
 var indexRouter = require('./Routes/index');
 var usersRouter = require('./Routes/users');
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ const Dishes = require('./models/dishes');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var config = require('./config');
+
 const hostname = 'localhost';
 const port = 3000;
 
@@ -53,6 +55,7 @@ app.use(passport.initialize());
 // }));
 app.use(indexRouter);
 app.use(usersRouter);
+app.use(uploadRouter);
 // function auth (req, res, next) {
 //   console.log(req.user);
 
@@ -72,7 +75,7 @@ app.use(leadersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-const server = http.createServer(app);
+//const server = http.createServer(app);
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -82,6 +85,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
+module.exports = app;
