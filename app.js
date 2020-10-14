@@ -6,9 +6,11 @@ const dishRouter = require('./Routes/dishRouter');
 const promotionsRouter=require('./Routes/PromoRouter')
 const leadersRouter=require('./Routes/leaderRouter')
 const uploadRouter = require('./Routes/uploadRouter')
+const favoriteRouter=require('./Routes/favoriteRouter')
 var indexRouter = require('./Routes/index');
 var usersRouter = require('./Routes/users');
 const mongoose = require('mongoose');
+const cors = require('./cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
@@ -56,6 +58,7 @@ app.use(passport.initialize());
 app.use(indexRouter);
 app.use(usersRouter);
 app.use(uploadRouter);
+app.use(favoriteRouter);
 // function auth (req, res, next) {
 //   console.log(req.user);
 
